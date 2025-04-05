@@ -42,51 +42,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal">
 
-            <!-- 车辆信息卡片 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardElevation="4dp"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:src="@drawable/car"
-                        android:contentDescription="车辆图标"
-                        android:layout_marginEnd="16dp" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:text="京A12345"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:text="上次保养: 2025-02-15 | 行驶里程: 28,560 km"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
             <!-- 功能模块网格布局 -->
             <GridLayout
                 android:layout_width="match_parent"
@@ -98,6 +53,7 @@
 
                 <!-- 单个功能按钮 -->
                 <LinearLayout
+                    android:id="@+id/car_info"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_width="0dp"

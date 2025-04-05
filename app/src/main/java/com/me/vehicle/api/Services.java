@@ -1,6 +1,9 @@
 package com.me.vehicle.api;
 
 import com.me.vehicle.model.Users;
+import com.me.vehicle.model.Vehicle;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,4 +17,7 @@ public interface Services {
 
     @GET("/vehicle/users/info")
     Call<AjaxResult<Users>> getUserInfo();
+
+    @GET("/vehicle/vehicles/list")
+    Call<ApiResponse<List<Vehicle>>> getCarList();
 }

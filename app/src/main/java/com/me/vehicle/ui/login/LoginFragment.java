@@ -35,7 +35,6 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel mViewModel;
     private Services services;
-
     private FragmentLoginBinding binding;
 
     public static LoginFragment newInstance() {
@@ -135,7 +134,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onFailure(Call<AjaxResult<Users>> call, Throwable t) {
                 ToastUtil.showToast(requireActivity(), "网络错误，请稍后重试");
-
             }
         });
     }
