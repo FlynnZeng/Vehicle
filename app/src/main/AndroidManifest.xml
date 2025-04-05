@@ -13,11 +13,39 @@
         android:theme="@style/Theme.Vehicle"
         tools:targetApi="31">
         <activity
+            android:name=".ui.CarShootListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarShootResActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarShootActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarLocaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarCostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarReqActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CarInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
