@@ -22,7 +22,7 @@ public interface Services {
     @GET("/vehicle/users/info")
     Call<AjaxResult<Users>> getUserInfo();
 
-    // 获取派车记录
+    // 获取车辆列表
     @GET("/vehicle/vehicles/list")
     Call<ApiResponse<List<Vehicle>>> getCarList();
 
@@ -30,4 +30,7 @@ public interface Services {
     @GET("/vehicle/applications/list/{id}")
     Call<ApiResponse<List<VehicleUse>>> getCarUseRecords(@Path("id") Long carId);
 
+    // 申请用车
+    @POST("/vehicle/applications")
+    Call<AjaxResult<String>> requestUse(@Body VehicleUse use);
 }

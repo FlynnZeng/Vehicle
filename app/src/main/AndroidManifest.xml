@@ -46,7 +46,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.CarReqActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".ui.CarInfoActivity"
             android:exported="false" />

@@ -117,7 +117,7 @@ public class LoginFragment extends Fragment {
                     // 保存 token
                     PreferencesUtil.putString(requireActivity(), "username", user.getUsername());
                     PreferencesUtil.putString(requireActivity(), "realName", user.getRealName());
-                    PreferencesUtil.putInt(requireActivity(), "id", user.getId().intValue());
+                    PreferencesUtil.putLong(requireActivity(), "id", user.getId());
                     PreferencesUtil.putString(requireActivity(), "phone", user.getPhone());
                     PreferencesUtil.putString(requireActivity(), "role", user.getRole());
 

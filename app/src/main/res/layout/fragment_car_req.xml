@@ -15,7 +15,8 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back">
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,9 +47,10 @@
 
             <!-- 选择车辆 -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="选择车辆"
+                android:textAlignment="textStart"
                 android:textSize="14sp" />
 
             <Spinner
@@ -61,7 +63,7 @@
 
             <!-- 用车日期 -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="用车日期"
                 android:textSize="14sp" />
@@ -72,8 +74,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_edittext"
-                android:focusable="false"
-                android:hint="2025/03/31"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:hint="用车日期"
                 android:inputType="none"
                 android:padding="12dp" />
 
@@ -103,8 +106,9 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_edittext"
                         android:focusable="false"
-                        android:hint="09:00"
                         android:inputType="none"
+                        android:clickable="true"
+                        android:hint="09:00"
                         android:padding="12dp" />
                 </LinearLayout>
 
@@ -130,15 +134,16 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_edittext"
                         android:focusable="false"
-                        android:hint="17:00"
                         android:inputType="none"
+                        android:clickable="true"
+                        android:hint="09:00"
                         android:padding="12dp" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- 用车人 -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="用车人"
                 android:textSize="14sp" />
@@ -149,28 +154,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="张明"
+                android:hint="填写用车人"
                 android:padding="12dp" />
 
             <!-- 随行人员 -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="随行人员"
+                android:text="随行人员(多个人员使用 ，分割)"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edit_follow"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="填写随行人员姓名"
-                android:padding="12dp" />
+                android:gravity="top"
+                android:hint="请填写随行人员"
+                android:inputType="textMultiLine"
+                android:padding="12dp"
+                />
 
             <!-- 用车事由 -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="用车事由"
                 android:textSize="14sp" />
@@ -187,36 +195,59 @@
                 android:padding="12dp" />
 
             <!-- 出发地点 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="出发地点"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/edit_from"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="填写起点"
-                android:padding="12dp" />
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <!-- 目的地 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="目的地"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edit_to"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="填写终点"
-                android:padding="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="出发地点"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/edit_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edittext"
+                        android:hint="填写起点"
+                        android:padding="12dp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="目的地"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/edit_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edittext"
+                        android:hint="填写终点"
+                        android:padding="12dp" />
+                </LinearLayout>
+            </LinearLayout>
 
             <!-- 提交按钮 -->
             <Button

@@ -8,7 +8,7 @@ public class VehicleUse {
     private Long id;
 
     /** 申请用户ID，关联users表 */
-    private Long userID;
+    private Long userId;
 
     private String username;
 
@@ -16,7 +16,7 @@ public class VehicleUse {
     private Long vehicleId;
 
     /** 申请日期 */
-    private Date applyDate;
+    private String applyDate;
 
     /** 用车开始时间 */
     private String startTime;
@@ -59,11 +59,11 @@ public class VehicleUse {
     }
 
     public Long getUserID() {
-        return userID;
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserID(Long userId) {
+        this.userId = userId;
     }
 
     public Long getVehicleId() {
@@ -74,11 +74,11 @@ public class VehicleUse {
         this.vehicleId = vehicleId;
     }
 
-    public Date getApplyDate() {
+    public String getApplyDate() {
         return applyDate;
     }
 
-    public void setApplyDate(Date applyDate) {
+    public void setApplyDate(String applyDate) {
         this.applyDate = applyDate;
     }
 
