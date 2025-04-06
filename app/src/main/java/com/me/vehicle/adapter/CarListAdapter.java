@@ -44,7 +44,6 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Vehicle car = carList.get(position);
 
-        Log.i("link", Https.BASEURL+car.getCover());
         ImageLoader.loadImage(holder.carImage, Https.BASEURL+car.getCover());
         holder.plateText.setText(car.getPlateNumber());
 

@@ -40,7 +40,6 @@ import retrofit2.Retrofit;
 
 public class CarListFragment extends Fragment {
 
-    private CarListViewModel mViewModel;
     private FragmentCarListBinding binding;
     private Services services;
     private List<Vehicle> carList;
@@ -53,7 +52,6 @@ public class CarListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CarListViewModel.class);
 
         Retrofit client = RetrofitClient.getClient(requireActivity());
         services = client.create(Services.class);

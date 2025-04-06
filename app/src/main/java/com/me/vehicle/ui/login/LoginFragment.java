@@ -33,7 +33,6 @@ import retrofit2.Retrofit;
 
 public class LoginFragment extends Fragment {
 
-    private LoginViewModel mViewModel;
     private Services services;
     private FragmentLoginBinding binding;
 
@@ -44,7 +43,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         Retrofit client = RetrofitClient.getClient(requireActivity());
         services = client.create(Services.class);

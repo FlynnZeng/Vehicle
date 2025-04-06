@@ -11,26 +11,46 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.me.vehicle.R;
+import com.me.vehicle.adapter.CarUseAdapter;
+import com.me.vehicle.api.ApiResponse;
+import com.me.vehicle.api.RetrofitClient;
+import com.me.vehicle.api.Services;
 import com.me.vehicle.databinding.FragmentCarInfoBinding;
+import com.me.vehicle.model.Users;
 import com.me.vehicle.model.Vehicle;
+import com.me.vehicle.model.VehicleUse;
 import com.me.vehicle.utils.DateUtils;
 import com.me.vehicle.utils.Https;
 import com.me.vehicle.utils.ImageLoader;
+import com.me.vehicle.utils.PreferencesUtil;
+import com.me.vehicle.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class CarInfoFragment extends Fragment {
 
-    private CarInfoViewModel mViewModel;
     private FragmentCarInfoBinding binding;
+    private Services services;
+    private Long carId;
+    private List<VehicleUse> useList;
+
+    private CarUseAdapter carUseAdapter;
 
     public static CarInfoFragment newInstance() {
         return new CarInfoFragment();
@@ -39,8 +59,9 @@ public class CarInfoFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CarInfoViewModel.class);
-        // TODO: Use the ViewModel
+
+        Retrofit client = RetrofitClient.getClient(requireActivity());
+        services = client.create(Services.class);
     }
 
     @Nullable
@@ -58,6 +79,12 @@ public class CarInfoFragment extends Fragment {
 
         initData();
 
+        useList = new ArrayList<>();
+
+        carUseAdapter = new CarUseAdapter(useList);
+        binding.carUseList.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.carUseList.setAdapter(carUseAdapter);
+        getUseList();
 
         return root;
     }
@@ -66,6 +93,7 @@ public class CarInfoFragment extends Fragment {
         Intent intent = requireActivity().getIntent();
         Vehicle carInfo = (Vehicle) intent.getSerializableExtra("carInfo");
         if (carInfo != null) {
+            carId = carInfo.getId();
             ImageLoader.loadImage(binding.carCover, Https.BASEURL+carInfo.getCover());
             binding.carNum.setText(carInfo.getPlateNumber());
             binding.carType.setText(String.format("%s | %s", carInfo.getBrand(),carInfo.getColor()));
@@ -80,4 +108,26 @@ public class CarInfoFragment extends Fragment {
         }
     }
 
+    private void getUseList(){
+        services.getCarUseRecords(carId).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<VehicleUse>>> call, Response<ApiResponse<List<VehicleUse>>> response) {
+                ApiResponse<List<VehicleUse>> body = response.body();
+                if (body != null && body.getCode() == 200) {
+                    List<VehicleUse> rows = body.getRows();
+                    useList.clear();
+                    useList.addAll(rows);
+                    carUseAdapter.notifyDataSetChanged();
+                } else {
+                    String msg = (body != null && body.getMsg() != null) ? body.getMsg() : "获取列表失败，请稍后重试";
+                    ToastUtil.showToast(requireActivity(), msg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<VehicleUse>>> call, Throwable t) {
+                ToastUtil.showToast(requireActivity(), "网络错误，请稍后重试");
+            }
+        });
+    }
 }

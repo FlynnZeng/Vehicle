@@ -16,7 +16,8 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back">
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="车辆类型:"
+                    android:text="车辆类型: \t\t"
                     android:textSize="14sp" />
 
                 <TextView
@@ -154,72 +155,27 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 卡片：最近使用记录 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_usage"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/use_history"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp"
+        android:layout_marginBottom="12dp"
+        android:paddingStart="14dp"
+        android:text="最近使用记录"
+        android:gravity="start"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_basic">
+        app:layout_constraintTop_toBottomOf="@id/card_basic"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="最近使用记录"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <!-- 使用记录 1 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2025-03-25 09:30 - 17:45"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="用车人: 张明"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="用车事由: 客户拜访"
-                android:textSize="14sp" />
-
-            <!-- 使用记录 2 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2025-03-22 13:30 - 16:15"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="用车人: 李华"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="用车事由: 会议接送"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/car_use_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/use_history" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
