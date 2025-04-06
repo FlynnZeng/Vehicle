@@ -77,6 +77,8 @@ public class CarShootFragment extends Fragment {
     private File photoFile; // 保存拍照时的实际文件
     private PhotoRecord record;
     private Dispatch dispatch;
+    private  long applyId;
+    private String useText;
 
     public static CarShootFragment newInstance() {
         return new CarShootFragment();
@@ -132,6 +134,7 @@ public class CarShootFragment extends Fragment {
         dispatch = new Dispatch();
 
         Intent intent = requireActivity().getIntent();
+        applyId = intent.getLongExtra("apply_id", -1);
         use = (VehicleUse) intent.getSerializableExtra("carInfo");
         assert use != null;
         binding.editUser.setText(use.getUsername());
@@ -226,8 +229,8 @@ public class CarShootFragment extends Fragment {
             Bitmap original = BitmapFactory.decodeStream(inputStream);
 
             // 添加水印
-            String watermark = generateWatermarkText(username, plateNumber);
-            Bitmap watermarked = addWatermark(original, watermark);
+            useText = generateWatermarkText(username, plateNumber);
+            Bitmap watermarked = addWatermark(original, useText);
 
             // 显示预览图
             binding.imagePreview.setImageBitmap(watermarked);
@@ -314,7 +317,6 @@ public class CarShootFragment extends Fragment {
             public void onResponse(Call<AjaxResult<String>> call, Response<AjaxResult<String>> response) {
                 AjaxResult<String> body = response.body();
                 if (body != null && body.getCode() == 200) {
-                    ToastUtil.showToast(requireActivity(), "上传成功");
                     addDispatchCar(dispatch);
                 } else {
                     ToastUtil.showToast(requireContext(), "上传失败: " + (body != null ? body.getMsg() : "未知错误"));
@@ -334,12 +336,31 @@ public class CarShootFragment extends Fragment {
             public void onResponse(Call<AjaxResult<String>> call, Response<AjaxResult<String>> response) {
                 AjaxResult<String> body = response.body();
                 if (body != null && body.getCode() == 200) {
-                    Intent intent = new Intent(requireActivity(), CarShootResActivity.class);
-                    startActivity(intent);
-                    requireActivity().finish();
+                    updateApplyState();
                 } else {
                     ToastUtil.showToast(requireContext(), "请求失败: " + (body != null ? body.getMsg() : "未知错误"));
                 }
+            }
+
+            @Override
+            public void onFailure(Call<AjaxResult<String>> call, Throwable t) {
+                ToastUtil.showToast(requireContext(), "网络错误，请稍后重试");
+            }
+        });
+    }
+
+    private void updateApplyState(){
+        VehicleUse vehicleUse = new VehicleUse();
+        vehicleUse.setId(applyId);
+        vehicleUse.setStatus("use");
+        services.updateApplyState(vehicleUse).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<AjaxResult<String>> call, Response<AjaxResult<String>> response) {
+                ToastUtil.showToast(requireActivity(), "上传成功");
+                Intent intent = new Intent(requireActivity(), CarShootResActivity.class);
+                intent.putExtra("use_info", useText);
+                startActivity(intent);
+                requireActivity().finish();
             }
 
             @Override

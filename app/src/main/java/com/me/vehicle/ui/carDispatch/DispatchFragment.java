@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.me.vehicle.R;
 import com.me.vehicle.adapter.CarUseAdapter;
 import com.me.vehicle.api.ApiResponse;
 import com.me.vehicle.api.RetrofitClient;
@@ -37,9 +36,7 @@ public class DispatchFragment extends Fragment {
 
     private FragmentDispatchBinding binding;
     private Services services;
-    private Long carId;
     private List<VehicleUse> useList;
-
     private CarUseAdapter carUseAdapter;
 
     public static DispatchFragment newInstance() {
@@ -72,6 +69,7 @@ public class DispatchFragment extends Fragment {
         carUseAdapter = new CarUseAdapter(useList, item->{
             Intent intent = new Intent(requireActivity(), CarShootActivity.class);
             intent.putExtra("carInfo", item);
+            intent.putExtra("apply_id", item.getId());
             startActivity(intent);
         });
         binding.carWaitUse.setLayoutManager(new LinearLayoutManager(getContext()));

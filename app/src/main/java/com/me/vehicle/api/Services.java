@@ -59,4 +59,8 @@ public interface Services {
     // 添加派车记录
     @POST("/vehicle/records")
     Call<AjaxResult<String>> addDispatchCar(@Body Dispatch dispatch);
+
+    // 更新用车状态
+    @POST("/vehicle/applications/update")
+    Call<AjaxResult<String>> updateApplyState(@Body VehicleUse vehicleUse);
 }

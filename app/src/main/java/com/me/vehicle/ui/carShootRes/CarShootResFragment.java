@@ -1,7 +1,11 @@
 package com.me.vehicle.ui.carShootRes;
 
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,11 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.me.vehicle.R;
+import com.me.vehicle.MainActivity;
+import com.me.vehicle.databinding.FragmentCarShootResBinding;
+import com.me.vehicle.ui.shootList.ShootListActivity;
 
 public class CarShootResFragment extends Fragment {
 
-    private CarShootResViewModel mViewModel;
+    private FragmentCarShootResBinding binding;
 
     public static CarShootResFragment newInstance() {
         return new CarShootResFragment();
@@ -25,15 +31,43 @@ public class CarShootResFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CarShootResViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_car_shoot_res, container, false);
+        binding = FragmentCarShootResBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+            Insets systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            binding.toolbar.setPadding(16, systemBarsInsets.top, 16, 0);
+            return insets;
+        });
+
+        init();
+
+        binding.btnHome.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), MainActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
+
+        binding.btnViewRecords.setOnClickListener(v->{
+            Intent intent = new Intent(requireActivity(), ShootListActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
+
+        return root;
+    }
+
+    private void init() {
+        Intent intent = requireActivity().getIntent();
+        String useInfo = intent.getStringExtra("use_info");
+
+        binding.useInfo.setText(useInfo);
     }
 
 }
