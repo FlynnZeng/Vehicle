@@ -17,10 +17,10 @@ public class Dispatch {
     private String useReason;
 
     /** 开始用车时间 */
-    private Date startTime;
+    private String startTime;
 
     /** 结束用车时间 */
-    private Date endTime;
+    private String endTime;
 
     /** 出发地点 */
     private String startLocation;
@@ -33,4 +33,84 @@ public class Dispatch {
 
     /** 记录创建时间，默认为当前时间戳 */
     private Date createdAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUseReason() {
+        return useReason;
+    }
+
+    public void setUseReason(String useReason) {
+        this.useReason = useReason;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public String getEndLocation() {
+        return endLocation;
+    }
+
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
+    }
+
+    public Long getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Long mileage) {
+        this.mileage = mileage;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

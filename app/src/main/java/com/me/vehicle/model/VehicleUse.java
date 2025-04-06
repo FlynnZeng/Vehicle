@@ -1,8 +1,9 @@
 package com.me.vehicle.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class VehicleUse {
+public class VehicleUse implements Serializable {
 
     /** 申请ID，自动递增的主键 */
     private Long id;

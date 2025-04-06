@@ -5,7 +5,30 @@
     android:id="@+id/car_shoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="出车前拍照留痕"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="0dp"
@@ -13,34 +36,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- 页面标题 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:text="出车前拍照留痕"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- 卡片容器 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@color/white"
                     android:padding="16dp">
 
                     <!-- 选择车辆 -->
@@ -50,13 +57,18 @@
                         android:text="选择车辆"
                         android:textSize="14sp" />
 
-                    <Spinner
-                        android:id="@+id/spinner_car"
+                    <EditText
+                        android:id="@+id/edit_car"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/bg_edittext"
-                        android:padding="12dp" />
+                        android:hint="车辆"
+                        android:padding="12dp"
+                        android:focusable="false"
+                        android:cursorVisible="false"
+                        android:longClickable="false"
+                        android:inputType="none" />
 
                     <!-- 用车人 -->
                     <TextView
@@ -72,7 +84,11 @@
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/bg_edittext"
                         android:hint="张明"
-                        android:padding="12dp" />
+                        android:padding="12dp"
+                        android:focusable="false"
+                        android:cursorVisible="false"
+                        android:longClickable="false"
+                        android:inputType="none" />
 
                     <!-- 相机预览区域 -->
                     <FrameLayout
@@ -83,13 +99,22 @@
                         android:background="#D6EEFF"
                         android:gravity="center">
 
+                        <ImageView
+                            android:id="@+id/image_preview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:visibility="gone" />
+
                         <TextView
+                            android:id="@+id/text_camera_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="相机预览区域"
                             android:textColor="@color/primary"
                             android:textSize="16sp" />
                     </FrameLayout>
+
 
                     <!-- 提示 -->
                     <TextView
@@ -110,13 +135,13 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btn_retry"
+                            android:id="@+id/btn_shoot"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_weight="1"
                             android:backgroundTint="#444444"
-                            android:text="重拍"
+                            android:text="拍照"
                             android:textColor="@android:color/white" />
 
                         <Button
@@ -129,7 +154,6 @@
                             android:textColor="@android:color/white" />
                     </LinearLayout>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

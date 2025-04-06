@@ -81,7 +81,7 @@ public class CarInfoFragment extends Fragment {
 
         useList = new ArrayList<>();
 
-        carUseAdapter = new CarUseAdapter(useList);
+        carUseAdapter = new CarUseAdapter(useList, null);
         binding.carUseList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.carUseList.setAdapter(carUseAdapter);
         getUseList();

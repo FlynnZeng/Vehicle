@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,11 +21,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vehicle"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
-            android:name=".ui.CarListActivity"
+            android:name=".ui.carDispatch.DispatchActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.carList.CarListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,34 +48,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.CarShootListActivity"
+            android:name=".ui.carShootList.CarShootListActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CarShootResActivity"
+            android:name=".ui.carShootRes.CarShootResActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CarShootActivity"
+            android:name=".ui.carShoot.CarShootActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CarLocaleActivity"
+            android:name=".ui.carLocale.CarLocaleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CarCostActivity"
+            android:name=".ui.carCost.CarCostActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CarRecordActivity"
+            android:name=".ui.carRecord.CarRecordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CarReqActivity"
+            android:name=".ui.carReq.CarReqActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.CarInfoActivity"
+            android:name=".ui.carInfo.CarInfoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
     </application>
 
 </manifest>

@@ -1,21 +1,20 @@
-package com.me.vehicle.ui;
+package com.me.vehicle.ui.carDispatch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.me.vehicle.R;
-import com.me.vehicle.ui.carInfo.CarInfoFragment;
 
-public class CarInfoActivity extends AppCompatActivity {
+public class DispatchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car_info);
+        setContentView(R.layout.activity_dispatch);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, CarInfoFragment.newInstance())
+                    .replace(R.id.container, DispatchFragment.newInstance())
                     .commitNow();
         }
     }

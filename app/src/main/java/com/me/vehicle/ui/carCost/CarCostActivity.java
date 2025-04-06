@@ -1,21 +1,20 @@
-package com.me.vehicle.ui;
+package com.me.vehicle.ui.carCost;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.me.vehicle.R;
-import com.me.vehicle.ui.carLocale.CarLocaleFragment;
 
-public class CarLocaleActivity extends AppCompatActivity {
+public class CarCostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car_locale);
+        setContentView(R.layout.activity_car_cost);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, CarLocaleFragment.newInstance())
+                    .replace(R.id.container, CarCostFragment.newInstance())
                     .commitNow();
         }
     }

@@ -1,11 +1,10 @@
-package com.me.vehicle.ui;
+package com.me.vehicle.ui.carRecord;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.me.vehicle.R;
-import com.me.vehicle.ui.carRecord.CarRecordFragment;
 
 public class CarRecordActivity extends AppCompatActivity {
 

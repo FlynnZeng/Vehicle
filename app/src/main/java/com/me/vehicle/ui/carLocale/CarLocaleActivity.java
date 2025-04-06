@@ -1,21 +1,20 @@
-package com.me.vehicle.ui;
+package com.me.vehicle.ui.carLocale;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.me.vehicle.R;
-import com.me.vehicle.ui.carShootRes.CarShootResFragment;
 
-public class CarShootResActivity extends AppCompatActivity {
+public class CarLocaleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car_shoot_res);
+        setContentView(R.layout.activity_car_locale);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, CarShootResFragment.newInstance())
+                    .replace(R.id.container, CarLocaleFragment.newInstance())
                     .commitNow();
         }
     }

@@ -7,15 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.me.vehicle.databinding.FragmentHomeBinding;
-import com.me.vehicle.ui.CarListActivity;
-import com.me.vehicle.ui.CarReqActivity;
+import com.me.vehicle.ui.carDispatch.DispatchActivity;
+import com.me.vehicle.ui.carList.CarListActivity;
+import com.me.vehicle.ui.carReq.CarReqActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -26,9 +24,6 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding.carReq.setOnClickListener(v->{
             Intent intent = new Intent(requireActivity(), CarReqActivity.class);
             startActivity(intent);
@@ -38,6 +33,12 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(requireActivity(), CarListActivity.class);
             startActivity(intent);
         });
+
+        binding.dispatch.setOnClickListener(v-> {
+            Intent intent = new Intent(requireActivity(), DispatchActivity.class);
+            startActivity(intent);
+        });
+
 
         return root;
     }

@@ -9,19 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.me.vehicle.R;
+import com.me.vehicle.callback.UseListCallback;
 import com.me.vehicle.model.VehicleUse;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class CarUseAdapter extends RecyclerView.Adapter<CarUseAdapter.ViewHolder> {
 
     private List<VehicleUse> dataList;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
 
-    public CarUseAdapter(List<VehicleUse> dataList) {
+    private UseListCallback callback;
+
+    public CarUseAdapter(List<VehicleUse> dataList, UseListCallback callback) {
         this.dataList = dataList;
+        this.callback = callback;
     }
 
     public void updateData(List<VehicleUse> newList) {
@@ -42,10 +43,12 @@ public class CarUseAdapter extends RecyclerView.Adapter<CarUseAdapter.ViewHolder
     public void onBindViewHolder(@NonNull CarUseAdapter.ViewHolder holder, int position) {
         VehicleUse item = dataList.get(position);
 
-        holder.textDate.setText(String.format("日期: %s", dateFormat.format(item.getApplyDate())));
+        holder.textDate.setText(String.format("日期: %s", item.getApplyDate()));
         holder.textTime.setText(String.format("时间: %s - %s", item.getStartTime(), item.getEndTime()));
         holder.textUsername.setText(String.format("用车人: %s", item.getUsername()));
         holder.textReason.setText(String.format("用车事由: %s", item.getReason()));
+
+        holder.itemView.setOnClickListener(v->callback.onClick(item));
     }
 
     @Override

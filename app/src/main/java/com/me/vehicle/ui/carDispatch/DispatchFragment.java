@@ -1,29 +1,28 @@
-package com.me.vehicle.ui.carList;
-
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+package com.me.vehicle.ui.carDispatch;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.me.vehicle.adapter.CarListAdapter;
+import com.me.vehicle.R;
+import com.me.vehicle.adapter.CarUseAdapter;
 import com.me.vehicle.api.ApiResponse;
 import com.me.vehicle.api.RetrofitClient;
 import com.me.vehicle.api.Services;
-import com.me.vehicle.databinding.FragmentCarListBinding;
-import com.me.vehicle.model.Vehicle;
-import com.me.vehicle.ui.carInfo.CarInfoActivity;
+import com.me.vehicle.databinding.FragmentDispatchBinding;
+import com.me.vehicle.model.VehicleUse;
+import com.me.vehicle.ui.carShoot.CarShootActivity;
 import com.me.vehicle.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -34,15 +33,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class CarListFragment extends Fragment {
+public class DispatchFragment extends Fragment {
 
-    private FragmentCarListBinding binding;
+    private FragmentDispatchBinding binding;
     private Services services;
-    private List<Vehicle> carList;
-    private CarListAdapter adapter;
+    private Long carId;
+    private List<VehicleUse> useList;
 
-    public static CarListFragment newInstance() {
-        return new CarListFragment();
+    private CarUseAdapter carUseAdapter;
+
+    public static DispatchFragment newInstance() {
+        return new DispatchFragment();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class CarListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentCarListBinding.inflate(inflater, container, false);
+        binding = FragmentDispatchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
@@ -66,32 +67,31 @@ public class CarListFragment extends Fragment {
             return insets;
         });
 
-        RecyclerView recyclerView = binding.carList;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        useList = new ArrayList<>();
 
-        carList = new ArrayList<>();
-        adapter = new CarListAdapter(getContext(), carList, item -> {
-            Intent intent = new Intent(requireActivity(), CarInfoActivity.class);
+        carUseAdapter = new CarUseAdapter(useList, item->{
+            Intent intent = new Intent(requireActivity(), CarShootActivity.class);
             intent.putExtra("carInfo", item);
             startActivity(intent);
         });
+        binding.carWaitUse.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.carWaitUse.setAdapter(carUseAdapter);
 
-        recyclerView.setAdapter(adapter);
-        getList();
+        getUseList();
+
         return root;
     }
 
-    private void getList(){
-        services.getCarList().enqueue(new Callback<>() {
+    private void getUseList(){
+        services.getWaitUseList().enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<ApiResponse<List<Vehicle>>> call, Response<ApiResponse<List<Vehicle>>> response) {
-                ApiResponse<List<Vehicle>> body = response.body();
+            public void onResponse(Call<ApiResponse<List<VehicleUse>>> call, Response<ApiResponse<List<VehicleUse>>> response) {
+                ApiResponse<List<VehicleUse>> body = response.body();
                 if (body != null && body.getCode() == 200) {
-                    List<Vehicle> rows = body.getRows();
-
-                    carList.clear();
-                    carList.addAll(rows);
-                    adapter.notifyDataSetChanged();
+                    List<VehicleUse> rows = body.getRows();
+                    useList.clear();
+                    useList.addAll(rows);
+                    carUseAdapter.notifyDataSetChanged();
                 } else {
                     String msg = (body != null && body.getMsg() != null) ? body.getMsg() : "获取列表失败，请稍后重试";
                     ToastUtil.showToast(requireActivity(), msg);
@@ -99,7 +99,7 @@ public class CarListFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<List<Vehicle>>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<List<VehicleUse>>> call, Throwable t) {
                 ToastUtil.showToast(requireActivity(), "网络错误，请稍后重试");
             }
         });

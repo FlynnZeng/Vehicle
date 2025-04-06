@@ -167,6 +167,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/dispatch"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_width="0dp"

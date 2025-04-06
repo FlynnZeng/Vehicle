@@ -1,10 +1,9 @@
-package com.me.vehicle.ui;
+package com.me.vehicle.ui.carList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import com.me.vehicle.R;
-import com.me.vehicle.ui.carList.CarListFragment;
 
 public class CarListActivity extends AppCompatActivity {
 
