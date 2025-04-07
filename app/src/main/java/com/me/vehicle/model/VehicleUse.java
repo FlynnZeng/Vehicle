@@ -15,6 +15,7 @@ public class VehicleUse implements Serializable {
 
     /** 申请车辆ID，关联vehicles表 */
     private Long vehicleId;
+    private String plateNumber;
 
     /** 申请日期 */
     private String applyDate;
@@ -145,5 +146,21 @@ public class VehicleUse implements Serializable {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -102,7 +102,6 @@ public class CarReqFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Vehicle selectedVehicle = carList.get(position);
                 // 你可以记录选中车的 ID 或其他字段
-                ToastUtil.showToast(requireActivity(), selectedVehicle.getPlateNumber());
             }
 
             @Override

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.me.vehicle.MainActivity;
 import com.me.vehicle.databinding.FragmentCarShootResBinding;
+import com.me.vehicle.ui.carRecord.CarRecordActivity;
 import com.me.vehicle.ui.shootList.ShootListActivity;
 
 public class CarShootResFragment extends Fragment {
@@ -55,7 +56,7 @@ public class CarShootResFragment extends Fragment {
         });
 
         binding.btnViewRecords.setOnClickListener(v->{
-            Intent intent = new Intent(requireActivity(), ShootListActivity.class);
+            Intent intent = new Intent(requireActivity(), CarRecordActivity.class);
             startActivity(intent);
             requireActivity().finish();
         });

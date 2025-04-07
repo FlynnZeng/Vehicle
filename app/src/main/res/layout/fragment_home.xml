@@ -100,6 +100,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/record"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_width="0dp"

@@ -63,4 +63,8 @@ public interface Services {
     // 更新用车状态
     @POST("/vehicle/applications/update")
     Call<AjaxResult<String>> updateApplyState(@Body VehicleUse vehicleUse);
+
+    // 获取出车记录
+    @GET("/vehicle/applications/list")
+    Call<ApiResponse<List<VehicleUse>>> getDispatchRecord();
 }

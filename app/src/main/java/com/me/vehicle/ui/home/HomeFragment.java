@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.me.vehicle.databinding.FragmentHomeBinding;
 import com.me.vehicle.ui.carDispatch.DispatchActivity;
 import com.me.vehicle.ui.carList.CarListActivity;
+import com.me.vehicle.ui.carRecord.CarRecordActivity;
 import com.me.vehicle.ui.carReq.CarReqActivity;
 
 public class HomeFragment extends Fragment {
@@ -36,6 +37,11 @@ public class HomeFragment extends Fragment {
 
         binding.dispatch.setOnClickListener(v-> {
             Intent intent = new Intent(requireActivity(), DispatchActivity.class);
+            startActivity(intent);
+        });
+
+        binding.record.setOnClickListener(v-> {
+            Intent intent = new Intent(requireActivity(), CarRecordActivity.class);
             startActivity(intent);
         });
 
