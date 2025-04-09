@@ -91,8 +91,6 @@ public class LoginFragment extends Fragment {
 
                     getUserInfo();
 
-                    // TODO: 获取用户信息，然后调整首页
-
                 } else {
                     String msg = (body != null && body.getMsg() != null) ? body.getMsg() : "登录失败，请稍后重试";
                     ToastUtil.showToast(requireActivity(), msg);
@@ -120,6 +118,7 @@ public class LoginFragment extends Fragment {
                     PreferencesUtil.putLong(requireActivity(), "id", user.getId());
                     PreferencesUtil.putString(requireActivity(), "phone", user.getPhone());
                     PreferencesUtil.putString(requireActivity(), "role", user.getRole());
+                    PreferencesUtil.putBoolean(requireActivity(), "login", true);
 
                     ToastUtil.showToast(requireActivity(), "登录成功");
                     toHome();

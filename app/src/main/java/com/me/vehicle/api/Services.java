@@ -87,4 +87,16 @@ public interface Services {
     // 添加定位
     @POST("/vehicle/locations")
     Call<AjaxResult<String>> addLocations(@Body Locations locations);
+
+    // 修改用户信息
+    @POST("/vehicle/users/edit")
+    Call<AjaxResult<String>> changeInfo(@Body Users users);
+
+    // 检查用户原秘密是否正确
+    @POST("/vehicle/users/checkPassword")
+    Call<AjaxResult<Boolean>> checkPwd(@Body Users users);
+
+    // 退出登录
+    @GET("/vehicle/users/logout")
+    Call<AjaxResult<String>> logout();
 }

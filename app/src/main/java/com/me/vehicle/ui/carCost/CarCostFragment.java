@@ -16,7 +16,6 @@ import com.me.vehicle.R;
 
 public class CarCostFragment extends Fragment {
 
-    private CarCostViewModel mViewModel;
 
     public static CarCostFragment newInstance() {
         return new CarCostFragment();
@@ -25,8 +24,6 @@ public class CarCostFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CarCostViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Nullable

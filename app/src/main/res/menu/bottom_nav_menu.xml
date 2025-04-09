@@ -7,11 +7,6 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/insert_chart_24px"
-        android:title="@string/title_dashboard" />
-
-    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/profile_24px"
         android:title="@string/title_notifications" />

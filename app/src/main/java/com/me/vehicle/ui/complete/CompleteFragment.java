@@ -40,14 +40,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class CompleteFragment extends Fragment {
-
     private FragmentCompleteBinding binding;
-
     private Long carId, useId;
-
     private List<CostStatistics> costList;
-
-
     private Services services;
 
     public static CompleteFragment newInstance() {

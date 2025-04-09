@@ -123,30 +123,6 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
-                <!-- 第二行 -->
-                <LinearLayout
-                    android:id="@+id/statistics"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="费用统计"
-                        android:src="@drawable/ic_cost" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="费用统计"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/dispatch"
                     android:layout_width="0dp"
