@@ -107,4 +107,8 @@ public interface Services {
     // 用户车辆的费用信息
     @GET("/vehicle/statistics/list/{carId}")
     Call<ApiResponse<List<CostStatistics>>> getStatistics(@Path("carId") Long id);
+
+    // 获取车辆使用记录
+    @GET("/vehicle/applications/getCount/{id}")
+    Call<AjaxResult<String>> getCount(@Path("id") Long id);
 }

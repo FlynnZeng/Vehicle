@@ -3,7 +3,6 @@ package com.me.vehicle.ui.carInfo;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,7 +80,7 @@ public class CarInfoFragment extends Fragment {
 
         useList = new ArrayList<>();
 
-        carUseAdapter = new CarUseAdapter(useList, null);
+        carUseAdapter = new CarUseAdapter(useList, item->{});
         binding.carUseList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.carUseList.setAdapter(carUseAdapter);
         getUseList();

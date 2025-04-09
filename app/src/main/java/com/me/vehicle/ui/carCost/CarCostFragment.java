@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.me.vehicle.adapter.CostAdapter;
+import com.me.vehicle.api.AjaxResult;
 import com.me.vehicle.api.ApiResponse;
 import com.me.vehicle.api.RetrofitClient;
 import com.me.vehicle.api.Services;
@@ -76,6 +77,7 @@ public class CarCostFragment extends Fragment {
 
         initData();
         init();
+        getCount();
         return root;
     }
 
@@ -118,6 +120,24 @@ public class CarCostFragment extends Fragment {
                 ToastUtil.showToast(requireActivity(), "网络错误，请稍后重试");
             }
         });
+    }
 
+    private void getCount(){
+        services.getCount(car.getId()).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<AjaxResult<String>> call, Response<AjaxResult<String>> response) {
+                AjaxResult<String> body = response.body();
+                if (body != null && body.getCode() == 200) {
+                    binding.count.setText(String.format("%s 次", body.getData()));
+                }else{
+                    binding.count.setText(String.format("%s 次", 0));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AjaxResult<String>> call, Throwable t) {
+                ToastUtil.showToast(requireActivity(), "网络错误，请稍后重试");
+            }
+        });
     }
 }

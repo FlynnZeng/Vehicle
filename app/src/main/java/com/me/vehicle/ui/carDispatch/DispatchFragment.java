@@ -87,6 +87,16 @@ public class DispatchFragment extends Fragment {
                 ApiResponse<List<VehicleUse>> body = response.body();
                 if (body != null && body.getCode() == 200) {
                     List<VehicleUse> rows = body.getRows();
+
+                    if (rows.isEmpty()) {
+                        binding.carWaitUse.setVisibility(View.GONE);
+                        binding.textEmpty.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.carWaitUse.setVisibility(View.VISIBLE);
+                        binding.textEmpty.setVisibility(View.GONE);
+                    }
+
+
                     useList.clear();
                     useList.addAll(rows);
                     carUseAdapter.notifyDataSetChanged();
