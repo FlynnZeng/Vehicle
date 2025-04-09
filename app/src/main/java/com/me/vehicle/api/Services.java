@@ -99,4 +99,12 @@ public interface Services {
     // 退出登录
     @GET("/vehicle/users/logout")
     Call<AjaxResult<String>> logout();
+
+    // 注册用户
+    @POST("/vehicle/users")
+    Call<AjaxResult<String>> register(@Body Users user);
+
+    // 用户车辆的费用信息
+    @GET("/vehicle/statistics/list/{carId}")
+    Call<ApiResponse<List<CostStatistics>>> getStatistics(@Path("carId") Long id);
 }

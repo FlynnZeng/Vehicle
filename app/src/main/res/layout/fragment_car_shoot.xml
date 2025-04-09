@@ -24,9 +24,11 @@
             android:layout_gravity="start|center"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="出车前拍照留痕"
+            android:text="出车拍照"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="17dp" />
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.me.vehicle.R;
 import com.me.vehicle.callback.ItemCallback;
+import com.me.vehicle.model.CostStatistics;
 import com.me.vehicle.model.Vehicle;
 import com.me.vehicle.model.VehicleUse;
+import com.me.vehicle.ui.carCost.CarCostActivity;
 import com.me.vehicle.ui.carLocale.CarLocaleActivity;
 import com.me.vehicle.utils.Https;
 import com.me.vehicle.utils.ImageLoader;
@@ -61,6 +63,12 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
             intent.putExtra("item", car);
             context.startActivity(intent);
         });
+
+        holder.carReport.setOnClickListener(v->{
+            Intent intent = new Intent(context, CarCostActivity.class);
+            intent.putExtra("car", car);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -70,14 +78,14 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView carImage;
-        TextView plateText, curLocal;
-        TextView infoText;
+        TextView plateText, curLocal, carReport, infoText;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             carImage = itemView.findViewById(R.id.car_cover);
             plateText = itemView.findViewById(R.id.car_num);
             infoText = itemView.findViewById(R.id.car_basic);
+            carReport = itemView.findViewById(R.id.car_report);
             curLocal = itemView.findViewById(R.id.cur_local);
         }
     }

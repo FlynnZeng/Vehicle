@@ -23,6 +23,7 @@ import com.me.vehicle.api.RetrofitClient;
 import com.me.vehicle.api.Services;
 import com.me.vehicle.databinding.FragmentLoginBinding;
 import com.me.vehicle.model.Users;
+import com.me.vehicle.ui.register.RegisterActivity;
 import com.me.vehicle.utils.PreferencesUtil;
 import com.me.vehicle.utils.ToastUtil;
 
@@ -55,7 +56,17 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        binding.btnLogin.setOnClickListener(v->login());
+        boolean login = PreferencesUtil.getBoolean(requireActivity(), "login");
+
+        if(login){
+            toHome();
+            requireActivity().finish();
+        }
+
+        binding.btnLogin.setOnClickListener(v -> login());
+
+        binding.textRegister.setOnClickListener(v -> requireActivity().startActivity(
+                new Intent(requireActivity(), RegisterActivity.class)));
 
         return root;
     }
@@ -104,7 +115,7 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    public void getUserInfo(){
+    public void getUserInfo() {
         services.getUserInfo().enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<AjaxResult<Users>> call, Response<AjaxResult<Users>> response) {
@@ -135,7 +146,7 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    private void toHome(){
+    private void toHome() {
         Intent intent = new Intent(requireActivity(), MainActivity.class);
         startActivity(intent);
         requireActivity().finish();
