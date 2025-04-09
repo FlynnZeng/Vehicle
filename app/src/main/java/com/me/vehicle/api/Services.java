@@ -1,6 +1,10 @@
 package com.me.vehicle.api;
 
+import com.google.android.gms.common.api.Api;
+import com.me.vehicle.model.CarReturnInfo;
+import com.me.vehicle.model.CostStatistics;
 import com.me.vehicle.model.Dispatch;
+import com.me.vehicle.model.Locations;
 import com.me.vehicle.model.PhotoRecord;
 import com.me.vehicle.model.Users;
 import com.me.vehicle.model.Vehicle;
@@ -67,4 +71,20 @@ public interface Services {
     // 获取出车记录
     @GET("/vehicle/applications/list")
     Call<ApiResponse<List<VehicleUse>>> getDispatchRecord();
+
+    // 添加车辆行驶里程
+    @POST("/vehicle/applications/mileage")
+    Call<AjaxResult<String>> addMileage(@Body CarReturnInfo info);
+
+    // 添加统计费用
+    @POST("/vehicle/statistics/add-more")
+    Call<AjaxResult<String>> addExpenses(@Body List<CostStatistics> list);
+
+    // 获取当前车辆定位记录
+    @GET("/vehicle/locations/car/{id}")
+    Call<AjaxResult<List<Locations>>> getLocations(@Path("id") Long id);
+
+    // 添加定位
+    @POST("/vehicle/locations")
+    Call<AjaxResult<String>> addLocations(@Body Locations locations);
 }

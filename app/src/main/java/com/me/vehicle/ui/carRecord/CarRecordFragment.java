@@ -1,7 +1,11 @@
 package com.me.vehicle.ui.carRecord;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +27,7 @@ import com.me.vehicle.databinding.FragmentCarRecordBinding;
 import com.me.vehicle.model.Dispatch;
 import com.me.vehicle.model.Vehicle;
 import com.me.vehicle.model.VehicleUse;
+import com.me.vehicle.ui.complete.CompleteActivity;
 import com.me.vehicle.utils.ToastUtil;
 
 import java.util.List;
@@ -38,7 +43,7 @@ public class CarRecordFragment extends Fragment {
 
     private DispatchAdapter adapter;
 
-    private  RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     public static CarRecordFragment newInstance() {
         return new CarRecordFragment();
@@ -56,18 +61,38 @@ public class CarRecordFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding =  FragmentCarRecordBinding.inflate(inflater, container, false);
+        binding = FragmentCarRecordBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+            Insets systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            binding.toolbar.setPadding(16, systemBarsInsets.top, 16, 0);
+            return insets;
+        });
 
         recyclerView = root.findViewById(R.id.record_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new DispatchAdapter();
+        adapter = new DispatchAdapter(item -> {
+            if (!item.getStatus().equals("use")) {
+                ToastUtil.showToast(requireActivity(), "车辆没有使用，无需归还");
+            } else {
+                Intent intent = new Intent(requireActivity(), CompleteActivity.class);
+                intent.putExtra("item", item);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
         init();
         return root;
     }
 
-    private void init(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        init();
+    }
+
+    private void init() {
         services.getDispatchRecord().enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ApiResponse<List<VehicleUse>>> call, Response<ApiResponse<List<VehicleUse>>> response) {

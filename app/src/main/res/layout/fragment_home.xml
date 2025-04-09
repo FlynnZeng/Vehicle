@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/car_locale"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <!-- 顶部标题栏 -->
     <androidx.appcompat.widget.Toolbar
@@ -15,8 +16,8 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/home_24px">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,170 +27,149 @@
             android:text="车辆管理系统"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <!-- 主体内容区域 -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:padding="16dp">
+        android:layout_height="0dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <!-- 功能模块网格布局 -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:alignmentMode="alignMargins"
                 android:columnCount="3"
                 android:rowCount="2"
-                android:alignmentMode="alignMargins"
                 android:useDefaultMargins="true">
 
                 <!-- 单个功能按钮 -->
                 <LinearLayout
                     android:id="@+id/car_info"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_info"
-                        android:contentDescription="车辆信息" />
+                        android:contentDescription="车辆信息"
+                        android:src="@drawable/ic_info" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="车辆信息"
                         android:layout_marginTop="8dp"
+                        android:text="车辆信息"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/car_req"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_request"
-                        android:contentDescription="用车申请" />
+                        android:contentDescription="用车申请"
+                        android:src="@drawable/ic_request" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="用车申请"
                         android:layout_marginTop="8dp"
+                        android:text="用车申请"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/record"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_dispatch"
-                        android:contentDescription="派车记录" />
+                        android:contentDescription="用车记录"
+                        android:src="@drawable/ic_dispatch" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="派车记录"
                         android:layout_marginTop="8dp"
+                        android:text="用车记录"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <!-- 第二行 -->
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:gravity="center"
+                    android:id="@+id/statistics"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_cost"
-                        android:contentDescription="费用统计" />
+                        android:contentDescription="费用统计"
+                        android:src="@drawable/ic_cost" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="费用统计"
-                        android:layout_marginTop="8dp"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ic_gps"
-                        android:contentDescription="实时定位" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="实时定位"
-                        android:layout_marginTop="8dp"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/dispatch"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_camera"
-                        android:contentDescription="出车拍照" />
+                        android:contentDescription="出车拍照"
+                        android:src="@drawable/ic_camera" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="出车拍照"
                         android:layout_marginTop="8dp"
+                        android:text="出车拍照"
                         android:textSize="14sp" />
                 </LinearLayout>
             </GridLayout>
         </LinearLayout>
     </ScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

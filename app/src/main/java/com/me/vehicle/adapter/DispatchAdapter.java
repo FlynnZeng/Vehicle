@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.me.vehicle.R;
+import com.me.vehicle.callback.ItemCallback;
 import com.me.vehicle.model.Dispatch;
 import com.me.vehicle.model.VehicleUse;
 
@@ -18,6 +19,12 @@ import java.util.List;
 public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.DispatchViewHolder> {
 
     private List<VehicleUse> dispatchList = new ArrayList<>();
+
+    private ItemCallback<VehicleUse> callback;
+
+    public DispatchAdapter(ItemCallback<VehicleUse> callback){
+        this.callback = callback;
+    }
 
     public void setData(List<VehicleUse> data) {
         dispatchList.clear();
@@ -45,6 +52,8 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.Dispat
         holder.userText.setText(String.format("用车人： %s", item.getUsername()));
         holder.reasonText.setText(String.format("用车事由： %s", item.getReason()));
         holder.routeText.setText(String.format("起点终点： %s → %s", item.getStartLocation(), item.getEndLocation()));
+
+        holder.itemView.setOnClickListener(v-> callback.onClick(item) );
     }
 
     @Override
@@ -58,8 +67,12 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.Dispat
                 return "待审核";
             case "approved":
                 return "已批准";
-            default:
+            case "rejected":
+                return "未批准";
+            case "use":
                 return "使用中";
+            default:
+                return "已完成";
         }
     }
 

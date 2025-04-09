@@ -1,7 +1,7 @@
 package com.me.vehicle.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.me.vehicle.R;
-import com.me.vehicle.callback.CarListCallback;
+import com.me.vehicle.callback.ItemCallback;
 import com.me.vehicle.model.Vehicle;
+import com.me.vehicle.model.VehicleUse;
+import com.me.vehicle.ui.carLocale.CarLocaleActivity;
 import com.me.vehicle.utils.Https;
 import com.me.vehicle.utils.ImageLoader;
 
@@ -25,9 +27,9 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
     private List<Vehicle> carList;
     private Context context;
-    private CarListCallback callback;
+    private ItemCallback<Vehicle> callback;
 
-    public CarListAdapter(Context context, List<Vehicle> carList, CarListCallback callback) {
+    public CarListAdapter(Context context, List<Vehicle> carList, ItemCallback<Vehicle> callback) {
         this.context = context;
         this.carList = carList;
         this.callback = callback;
@@ -52,7 +54,13 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
         holder.infoText.setText(String.format("上次保养: %s | 行驶里程: %d KM", sdf.format(car.getLastMaintenance()), car.getMileage()));
 
-        holder.itemView.setOnClickListener(v-> this.callback.onItemClick(car));
+        holder.itemView.setOnClickListener(v-> this.callback.onClick(car));
+
+        holder.curLocal.setOnClickListener(v->{
+            Intent intent = new Intent(context, CarLocaleActivity.class);
+            intent.putExtra("item", car);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -62,7 +70,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView carImage;
-        TextView plateText;
+        TextView plateText, curLocal;
         TextView infoText;
 
         public ViewHolder(@NonNull View itemView) {
@@ -70,6 +78,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
             carImage = itemView.findViewById(R.id.car_cover);
             plateText = itemView.findViewById(R.id.car_num);
             infoText = itemView.findViewById(R.id.car_basic);
+            curLocal = itemView.findViewById(R.id.cur_local);
         }
     }
 }

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.me.vehicle.R;
-import com.me.vehicle.callback.UseListCallback;
+import com.me.vehicle.callback.ItemCallback;
 import com.me.vehicle.model.VehicleUse;
 
 import java.util.List;
@@ -18,9 +18,9 @@ public class CarUseAdapter extends RecyclerView.Adapter<CarUseAdapter.ViewHolder
 
     private List<VehicleUse> dataList;
 
-    private UseListCallback callback;
+    private ItemCallback<VehicleUse> callback;
 
-    public CarUseAdapter(List<VehicleUse> dataList, UseListCallback callback) {
+    public CarUseAdapter(List<VehicleUse> dataList, ItemCallback<VehicleUse> callback) {
         this.dataList = dataList;
         this.callback = callback;
     }

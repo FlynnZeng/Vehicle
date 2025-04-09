@@ -52,4 +52,5 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.material)
 
+    implementation(libs.play.services.location)
 }

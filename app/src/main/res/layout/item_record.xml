@@ -63,9 +63,4 @@
             android:text="起点终点： 公司 → 国贸中心" />
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ccc"
-        />
 </LinearLayout>
