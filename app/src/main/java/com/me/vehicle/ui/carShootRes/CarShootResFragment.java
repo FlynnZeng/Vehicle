@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import com.me.vehicle.MainActivity;
 import com.me.vehicle.databinding.FragmentCarShootResBinding;
 import com.me.vehicle.ui.carRecord.CarRecordActivity;
-import com.me.vehicle.ui.shootList.ShootListActivity;
 
 public class CarShootResFragment extends Fragment {
 
